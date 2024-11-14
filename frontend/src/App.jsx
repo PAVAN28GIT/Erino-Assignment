@@ -1,12 +1,8 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
 import { Toaster } from 'react-hot-toast'
-
-
-import RootLayout from "./layout/RootLayout";
-import HomePage from "./Pages/Home/HomePage";
-import ContactInputPage from "./Pages/newContact/ContactInputPage";
-import ContactsPage from "./Pages/contacts/ContactsPage";
+import HomePage from './Pages/HomePage';
+import NoPage from './Pages/NoPage';
 
 
 function App() { 
@@ -14,15 +10,14 @@ function App() {
     <div>
       <Toaster />
       <Routes>
-
-        <Route path="/" element={<RootLayout />}>
-          <Route index element={<HomePage />} />
-          <Route path="new" element={<ContactInputPage />} />
-          <Route path="contacts" element={<ContactsPage />} />
-        </Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/not-found" element={<NoPage />} />
+  
       </Routes>
     </div>
   );
 }
 
 export default App
+
+

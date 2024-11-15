@@ -5,7 +5,7 @@ const contactSchema = new mongoose.Schema({
   lastName: { type: String, required: true },
 
   email: { type: String, required: true },
-  phoneNumber : { type: String, required: true },
+  phone : { type: String, required: true },
 
   company: { type: String, required: true },
   jobTitle: { type: String, required: true },

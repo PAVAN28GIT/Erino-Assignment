@@ -4,9 +4,9 @@ import { getContacts, addContact, updateContact, deleteContact } from "../contro
 
 const router = Router();
 
-router.get('/allcontact', getContacts );
-router.post('/addcontact', addContact );
-router.put('/update/:id', updateContact );
-router.delete('/delete/:id', deleteContact );
+router.get('/contacts', getContacts );
+router.post('/contacts', addContact );
+router.put('/contacts/:id', updateContact );
+router.delete('/contacts/:id', deleteContact );
 
 export default router;

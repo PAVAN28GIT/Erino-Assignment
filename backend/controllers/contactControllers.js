@@ -13,10 +13,12 @@ export const getContacts = async (req, res) => {
 }
 
 export const addContact = async (req, res) => {
-    console.log(req.body);
-    const { firstName, lastName, email, phoneNumber, company, jobTitle } = req.body;
+
+    console.log("from backend addcont" , req.body);
+    const { firstName, lastName, email, phone, company, jobTitle } = req.body;
     try {
-        const contact = await contact.findOne({ email });
+        const contact = await Contact.findOne({ email });
+   
         if (contact) {
           return res.status(400).json({ message: 'Contact already exists' });
         }
@@ -24,11 +26,13 @@ export const addContact = async (req, res) => {
           firstName,
           lastName,
           email,
-          phoneNumber,
+          phone,
           company,
           jobTitle
         });
+
         const savedContact = await newContact.save();
+
         res.status(201).json(savedContact);
       } catch (error) {
         res.status(500).json({ message: 'Error adding contact' });

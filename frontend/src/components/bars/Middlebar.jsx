@@ -3,7 +3,7 @@ import { useSearchParams } from 'react-router-dom';
 import ContactList from '../ContactList';
 import NewContactForm from '../NewContactForm';
 
-export default function Middlebar({ setSelectedContact }) {
+export default function Middlebar({ setSelectedContact , contacts }) {
   const [searchParams] = useSearchParams();
   const isNewContact = searchParams.get('newContact') === 'true';
 
@@ -13,7 +13,7 @@ export default function Middlebar({ setSelectedContact }) {
       {isNewContact ? (
         <NewContactForm  />
       ) : (
-        <ContactList setSelectedContact={setSelectedContact} />
+        <ContactList setSelectedContact={setSelectedContact} contacts={contacts} />
       )}
     </div>
   );

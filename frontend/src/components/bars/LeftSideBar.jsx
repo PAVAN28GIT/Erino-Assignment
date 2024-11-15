@@ -1,20 +1,21 @@
-import React from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
-import { Button } from '@mui/material';
-import PermContactCalendarIcon from '@mui/icons-material/PermContactCalendar';
-import logo from '../../assets/logo.png';
-import SearchIcon from '@mui/icons-material/Search';
-import StarIcon from '@mui/icons-material/Star';
-import BusinessIcon from '@mui/icons-material/Business';
-import AddCircleIcon from '@mui/icons-material/AddCircle';
-import EventAvailableIcon from '@mui/icons-material/EventAvailable';
+import React from "react";
+import { NavLink, useSearchParams } from "react-router-dom";
+import { Button } from "@mui/material";
+import PermContactCalendarIcon from "@mui/icons-material/PermContactCalendar";
+import logo from "../../assets/logo.png";
+import SearchIcon from "@mui/icons-material/Search";
+import StarIcon from "@mui/icons-material/Star";
+import BusinessIcon from "@mui/icons-material/Business";
+import AddCircleIcon from "@mui/icons-material/AddCircle";
+import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 function LeftSideBar() {
-  const navigate = useNavigate();
 
+  
+  const [searchParams, setSearchParams] = useSearchParams();
   const handleAddContact = () => {
-    console.log('Add Contact');
-    navigate('/?newContact=true');
+    searchParams.set("newContact", "true");
+    setSearchParams(searchParams);
   };
 
   return (
@@ -37,10 +38,22 @@ function LeftSideBar() {
 
       {/* Sidebar Links */}
       <div className="space-y-3 px-4">
-        <SidebarIcon icon={<PermContactCalendarIcon />} text="All People" to="/" />
-        <SidebarIcon icon={<BusinessIcon />} text="All Businesses" to="/not-found" />
+        <SidebarIcon
+          icon={<PermContactCalendarIcon />}
+          text="All People"
+          to="/"
+        />
+        <SidebarIcon
+          icon={<BusinessIcon />}
+          text="All Businesses"
+          to="/not-found"
+        />
         <SidebarIcon icon={<StarIcon />} text="Favorites" to="/not-found" />
-        <SidebarIcon icon={<EventAvailableIcon />} text="Event" to="/not-found" />
+        <SidebarIcon
+          icon={<EventAvailableIcon />}
+          text="Event"
+          to="/not-found"
+        />
       </div>
 
       {/* Add Contact Button */}
@@ -51,8 +64,8 @@ function LeftSideBar() {
           fullWidth
           onClick={handleAddContact}
           sx={{
-            backgroundColor: '#007aff',
-            '&:hover': { backgroundColor: '#005bb5' },
+            backgroundColor: "#007aff",
+            "&:hover": { backgroundColor: "#005bb5" },
           }}
         >
           Add Contact
@@ -69,7 +82,7 @@ function SidebarIcon({ icon, text, to }) {
       to={to}
       className={({ isActive }) =>
         `group flex items-center space-x-2 text-white text-base px-2 py-1 rounded transition duration-200 ${
-          isActive ? 'bg-zinc-700' : 'hover:bg-gray-800'
+          isActive ? "bg-zinc-700" : "hover:bg-gray-800"
         }`
       }
     >

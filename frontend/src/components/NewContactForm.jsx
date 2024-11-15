@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {  NavLink } from 'react-router-dom';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { Grid2 as Grid } from '@mui/material'; // Using Grid2 as Grid
+import { showToast } from '../utils/toast.js';
+import BackendURL from '../utils/config.js';
 
 
 
@@ -25,17 +27,41 @@ function NewContactForm() {
   };
 
   // Handle form submission
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    console.log('Form Data:', formData);
-    // Add form submission logic here
+    showToast('Adding contact...', 'loading');
+    try{
+
+      const response = await fetch(`${BackendURL}/api/contacts`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      }
+      )
+      showToast('','dismiss')
+      if(response.ok){
+        const data = await response.json();
+        showToast('Contact added successfully', 'success');
+      }else{
+        const error = await response.json();
+        showToast(error.message, 'error');
+      }
+      
+    }catch(error){
+      showToast('','dismiss')
+      showToast(error.message, 'error');
+      console.log(error);
+    }
+    
   };
 
   return (
     <div className="max-h-screen  flex flex-col items-center bg-gradient-to-r from-blue-900 via-purple-900 to-black px-4 mt-20 py-5  text-white font-Rubik">
-      <Link to="/" className="mb-4 text-blue-300 hover:text-blue-500 text-lg">
+      <NavLink to="/" className="mb-4 text-blue-300 hover:text-blue-500 text-lg">
         ← Back to Home
-      </Link>
+      </NavLink>
 
       <Box
         component="form"

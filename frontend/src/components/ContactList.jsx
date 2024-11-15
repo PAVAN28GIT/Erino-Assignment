@@ -12,16 +12,23 @@ const contacts = [
   { id: 8, name: 'Gino', tags: 'Gaming, Family', phone: '+1 (484) 381 44 56', email: 'ginosaur@hotmail.com', avatarUrl: 'path_to_image' },
   { id: 9, name: 'Jerry', tags: 'Developers, Family', phone: '+1 (484) 132 61 42', email: 'jerryco@conceptzilla.com', avatarUrl: 'path_to_image' },
   { id: 10, name: 'Jeffrey Macejkovic', tags: 'Family', phone: '+1 (484) 576 90 92', email: 'macekovic@gmail.com', avatarUrl: 'path_to_image' },
+  { id: 10, name: 'Jeffrey Macejkovic', tags: 'Family', phone: '+1 (484) 576 90 92', email: 'macekovic@gmail.com', avatarUrl: 'path_to_image' },
+  { id: 10, name: 'Jeffrey Macejkovic', tags: 'Family', phone: '+1 (484) 576 90 92', email: 'macekovic@gmail.com', avatarUrl: 'path_to_image' },
+  { id: 10, name: 'Jeffrey Macejkovic', tags: 'Family', phone: '+1 (484) 576 90 92', email: 'macekovic@gmail.com', avatarUrl: 'path_to_image' },
 ];
 
 function ContactList({ setSelectedContact }) {
   return (
-    <div className="bg-black text-white p-4 space-y-4">
+    <div className="bg-black w-full text-white space-y-4 overflow-y-auto">
+
+      <div className="w-[38rem] py-4 fixed z-10 text-center text-gray-300 font-Rubik text-4xl font-semibold bg-black "> All Contacts</div>
+
+      <div className='pt-16 px-2 '>
       {contacts.map((contact) => (
         <div
           key={contact.id}
           onClick={() => setSelectedContact(contact)}
-          className="flex items-center justify-between px-3 py-2 bg-zinc-800 rounded-lg hover:bg-gray-700 hover:scale-105 transition-transform cursor-pointer"
+          className="flex items-center justify-between px-5 py-2 bg-zinc-900 rounded-lg hover:bg-gray-700 hover:scale-105 transition-transform cursor-pointer my-3"
         >
           <div className="flex items-center space-x-4">
             <Avatar src={contact.avatarUrl} alt={contact.name} />
@@ -36,6 +43,11 @@ function ContactList({ setSelectedContact }) {
           </div>
         </div>
       ))}
+
+      </div>
+
+
+     
     </div>
   );
 }

@@ -7,14 +7,16 @@ function Contact({ contact }) {
     
   if (!contact) {
     return (
-      <div className="flex-grow h-screen flex items-center justify-center text-white text-xl">
+      <div className="h-screen flex items-center justify-center text-white text-xl">
         Select a contact to view details
       </div>
     );
   }
 
   return (
-    <div className="flex-grow h-screen p-5">
+    <div
+    style={{ width: 'calc(100vw - 56rem)' }}  
+    className="h-full p-5">
       <div className="h-full bg-zinc-900 p-5 rounded-xl text-white flex flex-col items-center space-y-4">
         <Avatar
           src={contact.avatarUrl || profilpic}

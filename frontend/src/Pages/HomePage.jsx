@@ -8,15 +8,13 @@ function HomePage() {
   const [selectedContact, setSelectedContact] = useState(null);
 
   return (
-    <div className="flex w-full h-screen bg-black text-white">
-      <LeftSideBar /> {/* Sidebar takes 2/12 of the screen width */}
-      <div className="flex w-full">
-        {" "}
-        {/* Middlebar and Contact components inside a flex container */}
+    <div className="flex flex-grow w-full h-screen bg-black text-white">
+      <LeftSideBar />
+      
         <Middlebar setSelectedContact={setSelectedContact} />
         <Contact selectedContact={selectedContact} />
       </div>
-    </div>
+  
   );
 }
 

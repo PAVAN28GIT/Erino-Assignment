@@ -9,7 +9,7 @@ import BusinessIcon from '@mui/icons-material/Business';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
 import EventAvailableIcon from '@mui/icons-material/EventAvailable';
 
-function SideBar() {
+function LeftSideBar() {
   const navigate = useNavigate();
 
   const handleAddContact = () => {
@@ -18,7 +18,7 @@ function SideBar() {
   };
 
   return (
-    <div className="h-full w-2/12 bg-black flex flex-col text-white py-10 space-y-12 px-5 border-r border-zinc-700 font-Rubik">
+    <div className="h-full w-[18rem] bg-black flex flex-col text-white py-10 space-y-12 px-5 border-r border-zinc-700 font-Rubik fixed left-0">
       {/* Logo */}
       <div className="flex items-center px-2">
         <img src={logo} alt="logo" className="w-10" />
@@ -69,7 +69,7 @@ function SidebarIcon({ icon, text, to }) {
       to={to}
       className={({ isActive }) =>
         `group flex items-center space-x-2 text-white text-base px-2 py-1 rounded transition duration-200 ${
-          isActive ? 'bg-gray-700' : 'hover:bg-gray-800'
+          isActive ? 'bg-zinc-700' : 'hover:bg-gray-800'
         }`
       }
     >
@@ -79,4 +79,4 @@ function SidebarIcon({ icon, text, to }) {
   );
 }
 
-export default SideBar;
+export default LeftSideBar;

@@ -1,9 +1,142 @@
-import React from 'react'
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { TextField, Button, Box, Typography } from '@mui/material';
+import { Grid2 as Grid } from '@mui/material'; // Using Grid2 as Grid
+
+
 
 function NewContactForm() {
+  const [formData, setFormData] = useState({
+    firstName: '',
+    lastName: '',
+    email: '',
+    phone: '',
+    company: '',
+    jobTitle: '',
+  });
+
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value,
+    });
+  };
+
+  // Handle form submission
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log('Form Data:', formData);
+    // Add form submission logic here
+  };
+
   return (
-    <div>NewContactForm</div>
-  )
+    <div className="max-h-screen  flex flex-col items-center bg-gradient-to-r from-blue-900 via-purple-900 to-black px-4 mt-20 py-5  text-white font-Rubik">
+      <Link to="/" className="mb-4 text-blue-300 hover:text-blue-500 text-lg">
+        ← Back to Home
+      </Link>
+
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        className="bg-zinc-900 p-6 rounded-xl shadow-xl"
+      >
+        <Typography variant="h4" className="text-center pb-6 font-semibold text-white">
+          New Contact Form
+        </Typography>
+
+        {/* Reuse FormGrid component for form fields */}
+        <Grid container spacing={3}>
+          <FormGrid
+            label="First Name"
+            name="firstName"
+            type="text"
+            value={formData.firstName}
+            handleInputChange={handleInputChange}
+          />
+          <FormGrid
+            label="Last Name"
+            name="lastName"
+            type="text"
+            value={formData.lastName}
+            handleInputChange={handleInputChange}
+          />
+          <FormGrid
+            label="Email"
+            name="email"
+            type="email"
+            value={formData.email}
+            handleInputChange={handleInputChange}
+          />
+          <FormGrid
+            label="Phone Number"
+            name="phone"
+            type="tel"
+            value={formData.phone}
+            handleInputChange={handleInputChange}
+          />
+          <FormGrid
+            label="Company"
+            name="company"
+            type="text"
+            value={formData.company}
+            handleInputChange={handleInputChange}
+          />
+          <FormGrid
+            label="Job Title"
+            name="jobTitle"
+            type="text"
+            value={formData.jobTitle}
+            handleInputChange={handleInputChange}
+          />
+        </Grid>
+
+        {/* Submit Button */}
+        <Box className="mt-6 flex justify-center w-full">
+          <Button
+            type="submit"
+            variant="contained"
+            size="large"
+            className="w-full sm:w-auto bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white hover:bg-gradient-to-l"
+            sx={{
+              borderRadius: '10px',
+              padding: '5px 40px',
+              fontSize: '1rem',
+            }}
+          >
+            Submit
+          </Button>
+        </Box>
+      </Box>
+    </div>
+  );
 }
 
-export default NewContactForm
+export default NewContactForm;
+
+
+// Reusable Grid Component
+function FormGrid({ label, name, type, value, handleInputChange }) {
+  return (
+    <Grid item xs={12} className="w-full">
+      <TextField
+        label={label}
+        variant="outlined"
+        fullWidth
+        name={name}
+        value={value}
+        onChange={handleInputChange}
+        required
+        type={type}
+        className="bg-zinc-800 text-white rounded-lg"
+        InputLabelProps={{
+          style: { color: '#fff' },
+        }}
+        InputProps={{
+          style: { color: '#fff' },
+        }}
+      />
+    </Grid>
+  );
+}

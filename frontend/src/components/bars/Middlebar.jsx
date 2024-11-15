@@ -8,7 +8,8 @@ export default function Middlebar({ setSelectedContact }) {
   const isNewContact = searchParams.get('newContact') === 'true';
 
   return (
-    <div className="w-6/12 h-full p-6 overflow-y-auto">
+    <div className="ml-[18rem] w-[38rem] h-full  overflow-y-auto border-r border-zinc-800">
+     
       {isNewContact ? (
         <NewContactForm />
       ) : (

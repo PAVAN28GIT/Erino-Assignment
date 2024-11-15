@@ -17,7 +17,7 @@ const contacts = [
   { id: 10, name: 'Jeffrey Macejkovic', tags: 'Family', phone: '+1 (484) 576 90 92', email: 'macekovic@gmail.com', avatarUrl: 'path_to_image' },
 ];
 
-function ContactList({ setSelectedContact }) {
+function ContactList({ setSelectedContact  }) {
   return (
     <div className="bg-black w-full text-white space-y-4 overflow-y-auto">
 

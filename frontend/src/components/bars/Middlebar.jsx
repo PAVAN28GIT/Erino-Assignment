@@ -11,7 +11,7 @@ export default function Middlebar({ setSelectedContact }) {
     <div className="ml-[18rem] w-[38rem] h-full  overflow-y-auto border-r border-zinc-800">
      
       {isNewContact ? (
-        <NewContactForm />
+        <NewContactForm  />
       ) : (
         <ContactList setSelectedContact={setSelectedContact} />
       )}

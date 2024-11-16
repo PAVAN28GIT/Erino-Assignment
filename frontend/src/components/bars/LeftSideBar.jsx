@@ -11,7 +11,7 @@ import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 
 function LeftSideBar() {
 
-  
+
   const [searchParams, setSearchParams] = useSearchParams();
   const handleAddContact = () => {
     searchParams.set("newContact", "true");

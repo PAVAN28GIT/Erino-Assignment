@@ -10,6 +10,7 @@ function HomePage() {
   const location = useLocation();
   const [contacts, setContacts] = useState([]);
   const [selectedContact, setSelectedContact] = useState(null);
+  const [updateContactID, setUpdateContactID] = useState(null);
 
   const fetchContacts = async () => {
     try {
@@ -35,7 +36,6 @@ function HomePage() {
       console.error("Error fetching contacts:", error);
     }
   };
-
   useEffect(() => {
     console.log('fetching contacts');
     fetchContacts();
@@ -45,8 +45,8 @@ function HomePage() {
   return (
     <div className="flex flex-grow w-full h-screen bg-black text-white">
       <LeftSideBar />
-      <Middlebar setSelectedContact={setSelectedContact}  contacts={contacts}/>
-      <Contact contact={selectedContact} fetchContacts={fetchContacts} />
+      <Middlebar setSelectedContact={setSelectedContact}  contacts={contacts} updateContactID={updateContactID}/>
+      <Contact contact={selectedContact} fetchContacts={fetchContacts} setUpdateContactID={setUpdateContactID} />
     </div>
   );
 }

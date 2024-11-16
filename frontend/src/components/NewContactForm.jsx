@@ -7,10 +7,10 @@ import BackendURL from '../utils/config.js';
 
 
 
-function NewContactForm() {
+function NewContactForm({oldContactID}) {
 
+  const [Update , setUpdate] = useState(false);
   const navigate = useNavigate();
-
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -20,6 +20,34 @@ function NewContactForm() {
     jobTitle: '',
   });
 
+  const getOldContact = async() => {
+    console.log("trying to get old contact");
+    const response = await fetch(`${BackendURL}/api/contacts/${oldContactID}`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+    console.log(response);
+    const data = await response.json();
+    console.log(data);
+    setFormData({
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      phone: data.phone,
+      company: data.company,
+    });
+
+    console.log("upated form data")
+    console.log(formData);
+  }
+
+  if(oldContactID && !Update){
+    setUpdate(true);
+    getOldContact();  
+  }
+  console.log(Update);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -61,6 +89,36 @@ function NewContactForm() {
     
   };
 
+  //Handle updation
+  const handleUpdateSubmit = async(e) => {
+    e.preventDefault();
+    showToast('Updating contact...', 'loading');
+    try{
+      const response = await fetch(`${BackendURL}/api/contacts/${oldContactID}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      }
+      )
+      showToast('','dismiss')
+      if(response.ok){
+        const data = await response.json();
+        showToast('Contact updated successfully', 'success');
+        navigate('/'); // Redirect to home page
+      }else{
+        const error = await response.json();
+        showToast(error.message, 'error');
+      }
+    }catch(error){
+      showToast('','dismiss')
+      showToast(error.message, 'error');
+      console.log(error);
+    }
+
+  }
+
   return (
     <div className="max-h-screen  flex flex-col items-center bg-gradient-to-r from-blue-900 via-purple-900 to-black px-4 mt-20 py-5  text-white font-Rubik">
       <NavLink to="/" className="mb-4 text-blue-300 hover:text-blue-500 text-lg">
@@ -69,11 +127,11 @@ function NewContactForm() {
 
       <Box
         component="form"
-        onSubmit={handleSubmit}
+        onSubmit={ oldContactID ? handleUpdateSubmit : handleSubmit}
         className="bg-zinc-900 p-6 rounded-xl shadow-xl"
       >
         <Typography variant="h4" className="text-center pb-6 font-semibold text-white">
-          New Contact Form
+          {Update ? "Update Contact Form" : " New Contact Form"}
         </Typography>
 
         {/* Reuse FormGrid component for form fields */}

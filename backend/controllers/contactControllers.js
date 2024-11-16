@@ -12,6 +12,21 @@ export const getContacts = async (req, res) => {
       }
 }
 
+export const getOneContact = async (req, res) => {
+  const { id } = req.params;
+  try {
+      const contact = await Contact.findById(id);
+      if (!contact) {
+        return res.status(404).json({ message: 'Contact not found' });
+      }
+      res.status(200).json(contact);
+  }catch (error) {
+      res.status(500).json({ message: 'Error retrieving contact' });
+  }
+  
+}
+
+
 export const addContact = async (req, res) => {
 
     console.log("from backend addcont" , req.body);

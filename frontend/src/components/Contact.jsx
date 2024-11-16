@@ -2,8 +2,10 @@ import React from 'react';
 import { Avatar, Typography, Divider, Button } from '@mui/material';
 import { showToast } from '../utils/toast.js';
 import  BackedURL  from '../utils/config.js';
+import { useSearchParams } from 'react-router-dom';
 
-function Contact({ contact , fetchContacts }) {
+function Contact({ contact , fetchContacts , setUpdateContactID }) {
+  const [searchParams, setSearchParams] = useSearchParams();
   const profilpic = "https://www.w3schools.com/howto/img_avatar.png";
 
   const handleDelete = async (id) => {
@@ -36,6 +38,13 @@ function Contact({ contact , fetchContacts }) {
     }
   };
 
+  const handleUpdate = async(id) => {
+    setUpdateContactID(id);
+    console.log("updated contact id to sfsf")
+    searchParams.set("newContact", "true");
+    setSearchParams(searchParams);
+    };
+  
   if (!contact) {
     return (
       <div className="h-screen flex items-center justify-center text-white text-xl">
@@ -82,7 +91,7 @@ function Contact({ contact , fetchContacts }) {
           <Button 
             variant="contained" 
             className="bg-gradient-to-r from-pink-500 via-purple-500 to-indigo-600 text-white hover:scale-105 transform transition duration-500"
-            onClick={() => console.log(contact._id)} 
+            onClick={() => handleUpdate(contact._id)} 
             sx={{ width: '48%' }}
           >
             Update

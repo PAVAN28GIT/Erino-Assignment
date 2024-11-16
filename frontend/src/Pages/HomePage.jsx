@@ -45,7 +45,7 @@ function HomePage() {
   return (
     <div className="flex flex-grow w-full h-screen bg-black text-white">
       <LeftSideBar />
-      <Middlebar setSelectedContact={setSelectedContact}  contacts={contacts} updateContactID={updateContactID}/>
+      <Middlebar setSelectedContact={setSelectedContact}  contacts={contacts} updateContact={[updateContactID, setUpdateContactID]}/>
       <Contact contact={selectedContact} fetchContacts={fetchContacts} setUpdateContactID={setUpdateContactID} />
     </div>
   );

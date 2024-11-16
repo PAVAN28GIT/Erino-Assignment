@@ -7,7 +7,9 @@ import BackendURL from '../utils/config.js';
 
 
 
-function NewContactForm({oldContactID}) {
+function NewContactForm({updateContact}) {
+
+  const[updateContactID , setUpdateContactID] = updateContact;
 
   const [Update , setUpdate] = useState(false);
   const navigate = useNavigate();
@@ -22,7 +24,7 @@ function NewContactForm({oldContactID}) {
 
   const getOldContact = async() => {
     console.log("trying to get old contact");
-    const response = await fetch(`${BackendURL}/api/contacts/${oldContactID}`, {
+    const response = await fetch(`${BackendURL}/api/contacts/${updateContactID}`, {
       method: 'GET',
       headers: {
         'Content-Type': 'application/json',
@@ -37,13 +39,14 @@ function NewContactForm({oldContactID}) {
       email: data.email,
       phone: data.phone,
       company: data.company,
+      jobTitle: data.jobTitle,
     });
 
     console.log("upated form data")
     console.log(formData);
   }
 
-  if(oldContactID && !Update){
+  if(updateContactID && Update == false){
     setUpdate(true);
     getOldContact();  
   }
@@ -94,7 +97,7 @@ function NewContactForm({oldContactID}) {
     e.preventDefault();
     showToast('Updating contact...', 'loading');
     try{
-      const response = await fetch(`${BackendURL}/api/contacts/${oldContactID}`, {
+      const response = await fetch(`${BackendURL}/api/contacts/${updateContactID}`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -106,6 +109,8 @@ function NewContactForm({oldContactID}) {
       if(response.ok){
         const data = await response.json();
         showToast('Contact updated successfully', 'success');
+        setUpdate(false);
+        setUpdateContactID(null);
         navigate('/'); // Redirect to home page
       }else{
         const error = await response.json();
@@ -127,7 +132,7 @@ function NewContactForm({oldContactID}) {
 
       <Box
         component="form"
-        onSubmit={ oldContactID ? handleUpdateSubmit : handleSubmit}
+        onSubmit={ updateContactID ? handleUpdateSubmit : handleSubmit}
         className="bg-zinc-900 p-6 rounded-xl shadow-xl"
       >
         <Typography variant="h4" className="text-center pb-6 font-semibold text-white">

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import {  NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import { TextField, Button, Box, Typography } from '@mui/material';
 import { Grid2 as Grid } from '@mui/material'; // Using Grid2 as Grid
 import { showToast } from '../utils/toast.js';
@@ -8,6 +8,9 @@ import BackendURL from '../utils/config.js';
 
 
 function NewContactForm() {
+
+  const navigate = useNavigate();
+
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -44,6 +47,7 @@ function NewContactForm() {
       if(response.ok){
         const data = await response.json();
         showToast('Contact added successfully', 'success');
+        navigate('/'); // Redirect to home page
       }else{
         const error = await response.json();
         showToast(error.message, 'error');

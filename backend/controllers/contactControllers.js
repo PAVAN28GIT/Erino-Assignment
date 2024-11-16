@@ -63,12 +63,13 @@ export const updateContact = async (req, res) => {
 
 export const deleteContact = async (req, res) => {
     const { id } = req.params;
+    console.log("from backend deletecont" , id);
     try {
-        const contact = await Contact.findById(id);
+        const contact = await Contact.findByIdAndDelete(id);
+        console.log("from backend deletecont" , contact)
         if (!contact) {
           return res.status(404).json({ message: 'Contact not found' });
         }
-        await contact.remove();
         res.status(200).json({ message: 'Contact deleted successfully' });
       } catch (error) {
         res.status(500).json({ message: 'Error deleting contact' });

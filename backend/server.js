@@ -27,5 +27,5 @@ app.get('/', (req, res) => {
 app.use('/api', contactRoutes);
 
 app.listen(8000, () => {
-    console.log('Server is running on port 5000');
+    console.log('Server is running on port 8000');
 })

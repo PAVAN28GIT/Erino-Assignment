@@ -44,3 +44,16 @@ To run this project locally, follow these steps:
    ```
    http://localhost:5173  
    ```
+
+
+## Challenges and Solutions
+
+1. **Learning Material UI**
+Challenge: It was my first time working with Material UI (MUI), so getting familiar with the components, design principles, and overall structure was initially challenging. Material UI has a lot of customizable options, and understanding how to integrate them into the React application was not straightforward at first.
+
+Solution: To overcome this, I followed a few YouTube tutorials and referred to the official Material UI documentation to get a better understanding of how to work with the library. Key resources that helped were:
+
+https://mui.com/material-ui/getting-started/installation/
+https://mui.com/material-ui/getting-started/usage/
+
+I also used ChatGPT as a resource while coding to clarify doubts and get suggestions on how to implement certain components or solve specific problems. Once I understood the fundamentals and structure of MUI, I was able to integrate its components effectively and create a clean and intuitive user interface.
